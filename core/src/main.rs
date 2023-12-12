@@ -1,6 +1,7 @@
 pub mod db;
 pub mod extensions;
 pub mod functions;
+pub mod models;
 pub mod routes;
 pub mod run;
 pub mod utils;
