@@ -18,7 +18,6 @@ pub async fn db_config() -> Result<Pool<Sqlite>> {
         .connect(format!("sqlite://{}", path.to_str().unwrap()).as_str())
         .await?;
 
-    // DB.set(db.clone());
     DB.get_or_init(|| db.clone());
 
     create_user_table().await?;

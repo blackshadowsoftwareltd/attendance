@@ -1,13 +1,23 @@
+use crate::utils::constants::sql_command::*;
+use crate::{models::user::User, utils::lock::DB};
 use anyhow::Result;
 
-use crate::{models::user::User, utils::lock::DB};
-
-pub async fn add_user_db(user: User) -> Result<()> {
+pub async fn add_user_db(user: User) -> Result<(), String> {
     let pool = DB.get().unwrap();
     let q = format!(
-        "INSERT INTO users (name, email,password) VALUES ({:?}, {:?},{:?})",
-        user.name, user.email, user.password
+        "{INSERT_INTO} {USERS} ({NAME}, {EMAIL},{PASSWARD}) {VALUES} ({:?}, {:?},{:?})",
+        user.name,
+        user.email,
+        user.password.unwrap()
     );
-    sqlx::query(q.as_str()).execute(pool).await?;
-    Ok(())
+    match sqlx::query(q.as_str()).execute(pool).await {
+        Ok(_) => {
+            println!("User added successfully");
+            Ok(())
+        }
+        Err(e) => Err(format!(
+            "Error adding user: {}",
+            e.as_database_error().unwrap().message()
+        )),
+    }
 }

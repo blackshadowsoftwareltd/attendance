@@ -6,5 +6,6 @@ pub struct User {
     pub user_id: i32,
     pub name: String,
     pub email: String,
-    pub password: String,
+    #[sqlx(default)] // for optional fields to read db
+    pub password: Option<String>,
 }
