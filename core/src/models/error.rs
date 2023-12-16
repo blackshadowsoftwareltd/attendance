@@ -1,0 +1,33 @@
+use axum::{http::StatusCode, Json};
+use serde::{Deserialize, Serialize};
+use sqlx::prelude::FromRow;
+
+use super::user::User;
+
+#[derive(Debug, Serialize, Deserialize, FromRow)]
+pub struct ErrorReason {
+    pub status: u16,
+    pub reason: Vec<String>,
+}
+impl ErrorReason {
+    pub fn new(status: u16, reason: Vec<String>) -> Self {
+        Self { status, reason }
+    }
+    pub fn add_bad_request(reason: String) -> Self {
+        Self {
+            status: 400,
+            reason: vec![reason],
+        }
+    }
+    pub fn user_create_bad_request(
+        reason: String,
+    ) -> (StatusCode, Result<Json<User>, Json<ErrorReason>>) {
+        (
+            StatusCode::BAD_REQUEST,
+            Err(Json(Self {
+                status: 400,
+                reason: vec![reason],
+            })),
+        )
+    }
+}
