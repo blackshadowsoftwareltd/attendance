@@ -10,6 +10,6 @@ pub async fn read_users_db() -> Result<Vec<User>> {
     let users = sqlx::query_as::<Sqlite, User>(q.as_str())
         .fetch_all(pool)
         .await?;
-
+    // println!("users: {:?}", users);
     Ok(users)
 }

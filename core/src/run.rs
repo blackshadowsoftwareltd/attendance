@@ -1,9 +1,4 @@
-use crate::{
-    db::{config::db_config, read::read_users_db, write::add_user_db},
-    models::user::User,
-    routes::router::routes,
-    utils::addr::ip_address,
-};
+use crate::{db::config::db_config, routes::router::routes, utils::addr::ip_address};
 
 pub async fn run() {
     println!("Start");

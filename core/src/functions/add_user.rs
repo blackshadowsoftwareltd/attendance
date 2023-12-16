@@ -7,16 +7,19 @@ use crate::{
 
 pub async fn add_user(
     Json(payload): Json<User>,
-) -> (StatusCode, Result<Json<User>, Json<ErrorReason>>) {
+) -> (StatusCode, Result<String, Json<ErrorReason>>) {
     println!("route : add_user");
     match add_user_db(payload.clone()).await {
         Ok(id) => {
             println!("User added successfully");
-            (StatusCode::CREATED, Ok(Json(payload.with_id(Some(id)))))
+            (
+                StatusCode::CREATED,
+                Ok(payload.skip_pass().with_id(Some(id)).to_json()),
+            )
         }
         Err(e) => {
             println!("Error adding user: {}", e);
-            ErrorReason::user_create_bad_request(e.to_string())
+            ErrorReason::bad_request(e.to_string())
         }
     }
 }
