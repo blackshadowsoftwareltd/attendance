@@ -15,3 +15,5 @@ pub const AUTO_INCREMENT: &str = "AUTOINCREMENT";
 pub const INSERT_INTO: &str = "INSERT INTO";
 pub const VARCHAR: &str = "VARCHAR (50)";
 pub const VALUES: &str = "VALUES";
+pub const DELETE: &str = "DELETE";
+pub const WHERE: &str = "WHERE";
