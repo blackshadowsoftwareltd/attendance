@@ -3,7 +3,9 @@ use sqlx::{sqlite::SqlitePoolOptions, Pool, Sqlite};
 use std::path::PathBuf;
 use tokio::fs::File;
 
-use crate::{db::create_table::create_user_table, utils::lock::DB};
+use crate::utils::lock::DB;
+
+use super::create_table::{create_check_in_table, create_user_table};
 
 pub async fn db_config() -> Result<Pool<Sqlite>> {
     let path = PathBuf::from("../attendance.db");
@@ -19,8 +21,13 @@ pub async fn db_config() -> Result<Pool<Sqlite>> {
         .await?;
 
     DB.get_or_init(|| db.clone());
-
-    create_user_table().await?;
+    create_tables().await.unwrap();
 
     Ok(db)
+}
+
+pub async fn create_tables() -> Result<()> {
+    create_user_table().await?;
+    create_check_in_table().await?;
+    Ok(())
 }

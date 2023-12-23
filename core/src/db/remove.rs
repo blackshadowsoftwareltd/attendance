@@ -15,3 +15,17 @@ pub async fn remove_users_db(users: Vec<i64>) -> Result<()> {
 
     Ok(())
 }
+
+pub async fn remove_entry_db(users: Vec<i64>) -> Result<()> {
+    let pool = DB.get().unwrap();
+    let ids = users
+        .iter()
+        .map(|x| x.to_string())
+        .collect::<Vec<String>>()
+        .join(", ");
+    let q = format!("{DELETE} from {ENTRY} {WHERE} {USER_ID} IN ({ids})",);
+    println!("{}", q);
+    sqlx::query(q.as_str()).execute(pool).await?;
+
+    Ok(())
+}

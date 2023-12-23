@@ -17,3 +17,9 @@ pub const VARCHAR: &str = "VARCHAR (50)";
 pub const VALUES: &str = "VALUES";
 pub const DELETE: &str = "DELETE";
 pub const WHERE: &str = "WHERE";
+pub const NOT_NULL: &str = "NOT NULL";
+pub const REFERENCES: &str = "REFERENCES";
+
+pub const CHECK_IN_ID: &str = "check_in_id";
+pub const ENTRY: &str = "checkin";
+pub const CHECK_IN_TIME: &str = "check_in_time";
