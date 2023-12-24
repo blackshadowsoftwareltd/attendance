@@ -15,9 +15,9 @@ pub async fn read_users_db() -> Result<Vec<User>> {
     Ok(users)
 }
 
-pub async fn read_entries_db() -> Result<Vec<CheckIn>> {
+pub async fn read_check_ins_db() -> Result<Vec<CheckIn>> {
     let pool = DB.get().unwrap();
-    let q = format!("Select * from {ENTRY}");
+    let q = format!("Select * from {CHECKIN}");
 
     let entries = sqlx::query_as::<Sqlite, CheckIn>(q.as_str())
         .fetch_all(pool)

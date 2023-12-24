@@ -18,7 +18,7 @@ pub async fn drop_table_tes() {
     match db_config().await {
         Ok(_) => {
             // drop_table("{USERS}").await.unwrap();
-            drop_table("{ENTRY}").await.unwrap();
+            drop_table("{CHECKIN}").await.unwrap();
         }
         Err(e) => {
             println!("{:?}", e);

@@ -21,5 +21,5 @@ pub const NOT_NULL: &str = "NOT NULL";
 pub const REFERENCES: &str = "REFERENCES";
 
 pub const CHECK_IN_ID: &str = "check_in_id";
-pub const ENTRY: &str = "checkin";
+pub const CHECKIN: &str = "checkin";
 pub const CHECK_IN_TIME: &str = "check_in_time";

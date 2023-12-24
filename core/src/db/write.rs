@@ -24,17 +24,16 @@ pub async fn add_user_db(user: User) -> Result<i64, String> {
     }
 }
 
-pub async fn add_entry_db(entry: CheckIn) -> Result<i64, String> {
+pub async fn add_check_in_db(checkin: CheckIn) -> Result<i64, String> {
     let pool = DB.get().unwrap();
     let q = format!(
-        "{INSERT_INTO} {ENTRY} ({USER_ID}, {CHECK_IN_TIME}) {VALUES} (?, ?)",
-        // entry.user_id.unwrap(),
-        // entry.check_in_time.unwrap()
+        "{INSERT_INTO} {CHECKIN} ({USER_ID}, {CHECK_IN_TIME}) {VALUES} (?, ?)",
+      
     );
     println!("0");
     match sqlx::query(q.as_str())
-        .bind(entry.user_id.unwrap())
-        .bind(entry.check_in_time.unwrap())
+        .bind(checkin.user_id.unwrap())
+        .bind(checkin.check_in_time.unwrap())
         .execute(pool)
         .await
     {
