@@ -5,7 +5,7 @@ use tokio::fs::File;
 
 use crate::utils::lock::DB;
 
-use super::create_table::{create_check_in_table, create_user_table};
+use super::create_table::{create_check_in_table, create_check_out_table, create_user_table};
 
 pub async fn db_config() -> Result<Pool<Sqlite>> {
     let path = PathBuf::from("../attendance.db");
@@ -29,5 +29,6 @@ pub async fn db_config() -> Result<Pool<Sqlite>> {
 pub async fn create_tables() -> Result<()> {
     create_user_table().await?;
     create_check_in_table().await?;
+    create_check_out_table().await?;
     Ok(())
 }

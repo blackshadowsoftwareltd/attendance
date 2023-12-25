@@ -20,6 +20,8 @@ pub const WHERE: &str = "WHERE";
 pub const NOT_NULL: &str = "NOT NULL";
 pub const REFERENCES: &str = "REFERENCES";
 
+pub const CHECK_OUT_ID: &str = "check_out_id";
 pub const CHECK_IN_ID: &str = "check_in_id";
 pub const CHECKIN: &str = "checkin";
-pub const CHECK_IN_TIME: &str = "check_in_time";
+pub const CHECKOUT: &str = "checkout";
+pub const CHECK_OUT_TIME: &str = "check_out_time";

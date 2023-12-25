@@ -36,3 +36,20 @@ pub async fn create_check_in_table() -> Result<()> {
     }
     Ok(())
 }
+
+pub async fn create_check_out_table() -> Result<()> {
+    {
+        let pool = DB.get().unwrap();
+        let q = format!(
+            "{CREATE_TABLE} {IF_NOT_EXISTS} {CHECKOUT} (
+            {CHECK_OUT_ID} {INTEGER} {PRIMARY_KEY} {AUTO_INCREMENT},
+            {CHECK_IN_ID} {INTEGER} {NOT_NULL} {REFERENCES} {CHECKIN}({CHECK_IN_ID}),
+            {CHECK_OUT_TIME} {VARCHAR} {NOT_NULL}
+        )"
+        );
+
+        sqlx::query(q.as_str()).execute(pool).await?;
+        println!("Created table Checkout")
+    }
+    Ok(())
+}

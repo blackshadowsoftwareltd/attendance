@@ -23,3 +23,4 @@ pub async fn checkin_checkout(
         None => ErrorReason::bad_request("Checkout Process not implemented yet".to_string()),
     }
 }
+// add_check_out_db

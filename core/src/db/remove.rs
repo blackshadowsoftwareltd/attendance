@@ -29,3 +29,17 @@ pub async fn remove_check_in_db(users: Vec<i64>) -> Result<()> {
 
     Ok(())
 }
+
+pub async fn remove_check_out_db(users: Vec<i64>) -> Result<()> {
+    let pool = DB.get().unwrap();
+    let ids = users
+        .iter()
+        .map(|x| x.to_string())
+        .collect::<Vec<String>>()
+        .join(", ");
+    let q = format!("{DELETE} from {CHECKOUT} {WHERE} {CHECK_OUT_ID} IN ({ids})",);
+    println!("{}", q);
+    sqlx::query(q.as_str()).execute(pool).await?;
+
+    Ok(())
+}
