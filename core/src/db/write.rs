@@ -1,5 +1,4 @@
-use crate::models::check_in::CheckIn;
-use crate::models::check_out::CheckOut;
+use crate::models::entry::EntryDetails;
 use crate::utils::constants::sql_command::*;
 use crate::{models::user::User, utils::lock::DB};
 use anyhow::Result;
@@ -25,7 +24,7 @@ pub async fn add_user_db(user: User) -> Result<i64, String> {
     }
 }
 
-pub async fn add_check_in_db(checkin: CheckIn) -> Result<i64, String> {
+pub async fn add_check_in_db(checkin: EntryDetails) -> Result<i64, String> {
     let pool = DB.get().unwrap();
     let q = format!("{INSERT_INTO} {CHECKIN} ({USER_ID}, {CHECK_IN_TIME}) {VALUES} (?, ?)",);
 
@@ -47,7 +46,7 @@ pub async fn add_check_in_db(checkin: CheckIn) -> Result<i64, String> {
     }
 }
 
-pub async fn add_check_out_db(checkout: CheckOut) -> Result<i64, String> {
+pub async fn add_check_out_db(checkout: EntryDetails) -> Result<i64, String> {
     let pool = DB.get().unwrap();
     let q = format!("{INSERT_INTO} {CHECKOUT} ({CHECK_IN_ID}, {CHECK_OUT_TIME}) {VALUES} (?, ?)",);
 

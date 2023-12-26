@@ -1,5 +1,4 @@
-use crate::models::check_in::CheckIn;
-use crate::models::check_out::CheckOut;
+use crate::models::entry::EntryDetails;
 use crate::utils::constants::sql_command::*;
 use crate::{models::user::User, utils::lock::DB};
 use anyhow::Result;
@@ -16,21 +15,21 @@ pub async fn read_users_db() -> Result<Vec<User>> {
     Ok(users)
 }
 
-pub async fn read_check_ins_db() -> Result<Vec<CheckIn>> {
+pub async fn read_check_ins_db() -> Result<Vec<EntryDetails>> {
     let pool = DB.get().unwrap();
     let q = format!("Select * from {CHECKIN}");
 
-    let checkins = sqlx::query_as::<Sqlite, CheckIn>(q.as_str())
+    let checkins = sqlx::query_as::<Sqlite, EntryDetails>(q.as_str())
         .fetch_all(pool)
         .await?;
     Ok(checkins)
 }
 
-pub async fn read_check_outs_db() -> Result<Vec<CheckOut>> {
+pub async fn read_check_outs_db() -> Result<Vec<EntryDetails>> {
     let pool = DB.get().unwrap();
     let q = format!("Select * from {CHECKOUT}");
 
-    let checkouts = sqlx::query_as::<Sqlite, CheckOut>(q.as_str())
+    let checkouts = sqlx::query_as::<Sqlite, EntryDetails>(q.as_str())
         .fetch_all(pool)
         .await?;
     Ok(checkouts)
