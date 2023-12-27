@@ -28,9 +28,23 @@ impl User {
 
 pub trait UserList {
     fn to_json(self) -> String;
+    fn get_user_by_id(self, id: i64) -> Option<User>;
 }
 impl UserList for Vec<User> {
     fn to_json(self) -> String {
         serde_json::to_string(&self).unwrap()
+    }
+
+    fn get_user_by_id(self, id: i64) -> Option<User> {
+        let users = self
+            .iter()
+            .filter(|u| u.user_id.unwrap() == id)
+            .collect::<Vec<&User>>()
+            .clone();
+        if users.len() > 0 {
+            Some(users[0].clone())
+        } else {
+            None
+        }
     }
 }

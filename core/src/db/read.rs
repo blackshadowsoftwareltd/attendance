@@ -34,3 +34,25 @@ pub async fn read_check_outs_db() -> Result<Vec<EntryDetails>> {
         .await?;
     Ok(checkouts)
 }
+
+pub async fn read_check_in_info_db(id: i64) -> Result<Vec<EntryDetails>> {
+    let pool = DB.get().unwrap();
+    let q = format!("Select * from {CHECKIN} where {USER_ID} = ?");
+
+    let checkins = sqlx::query_as::<Sqlite, EntryDetails>(q.as_str())
+        .bind(id)
+        .fetch_all(pool)
+        .await?;
+    Ok(checkins)
+}
+
+pub async fn read_check_out_info_db(id: i64) -> Result<Vec<EntryDetails>> {
+    let pool = DB.get().unwrap();
+    let q = format!("Select * from {CHECKOUT} where {CHECK_IN_ID} = ?");
+
+    let checkouts = sqlx::query_as::<Sqlite, EntryDetails>(q.as_str())
+        .bind(id)
+        .fetch_all(pool)
+        .await?;
+    Ok(checkouts)
+}
