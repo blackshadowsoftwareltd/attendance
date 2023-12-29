@@ -1,9 +1,11 @@
 pub mod add_user;
 pub mod break_off;
 pub mod checkin_checkout;
-pub mod get_all_users;
 pub mod get_all_checkins;
+pub mod get_all_leaves;
+pub mod get_all_users;
 pub mod get_user;
+pub mod leave;
 pub mod remove_users;
 pub mod root;
 pub mod take_break;

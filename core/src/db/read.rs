@@ -1,4 +1,5 @@
 use crate::models::entry::EntryDetails;
+use crate::models::leave::LeaveDetails;
 use crate::utils::constants::sql_command::*;
 use crate::{models::user::User, utils::lock::DB};
 use anyhow::Result;
@@ -55,4 +56,14 @@ pub async fn read_check_out_info_db(id: i64) -> Result<Vec<EntryDetails>> {
         .fetch_all(pool)
         .await?;
     Ok(checkouts)
+}
+
+pub async fn read_leaves_db() -> Result<Vec<LeaveDetails>> {
+    let pool = DB.get().unwrap();
+    let q = format!("Select * from {LEAVE}");
+
+    let checkins = sqlx::query_as::<Sqlite, LeaveDetails>(q.as_str())
+        .fetch_all(pool)
+        .await?;
+    Ok(checkins)
 }

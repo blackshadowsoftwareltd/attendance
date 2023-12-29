@@ -53,3 +53,21 @@ pub async fn create_check_out_table() -> Result<()> {
     }
     Ok(())
 }
+
+pub async fn create_leave_table() -> Result<()> {
+    {
+        let pool = DB.get().unwrap();
+        let q = format!(
+            "{CREATE_TABLE} {IF_NOT_EXISTS} {LEAVE} (
+            {LEAVE_ID} {INTEGER} {PRIMARY_KEY} {AUTO_INCREMENT},
+            {USER_ID} {INTEGER} {NOT_NULL} {REFERENCES} {USERS}({USER_ID}),
+            {LEAVE_TIME} {VARCHAR} {NOT_NULL},
+            {LEAVE_REASON} {VARCHAR} {NOT_NULL}
+        )"
+        );
+
+        sqlx::query(q.as_str()).execute(pool).await?;
+        println!("Created table leave")
+    }
+    Ok(())
+}

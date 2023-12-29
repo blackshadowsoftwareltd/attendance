@@ -33,6 +33,7 @@ pub async fn get_all_checkins() -> (StatusCode, Result<String, Json<ErrorReason>
                     user_info,
                     checkin: Some(c.clone()),
                     checkout,
+                    leave: None,
                 };
                 users_details.push(x);
             }

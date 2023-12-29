@@ -26,3 +26,8 @@ pub const CHECKIN: &str = "checkin";
 pub const CHECKOUT: &str = "checkout";
 pub const CHECK_IN_TIME: &str = "check_in_time";
 pub const CHECK_OUT_TIME: &str = "check_out_time";
+
+pub const LEAVE: &str = "leave";
+pub const LEAVE_ID: &str = "leave_id";
+pub const LEAVE_TIME: &str = "leave_time";
+pub const LEAVE_REASON: &str = "leave_reason";
