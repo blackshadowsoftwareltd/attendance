@@ -4,10 +4,14 @@ use axum::{
 };
 
 use crate::functions::{
-    add_user::add_user, break_off::break_off, checkin_checkout::checkin_checkout,
-    get_all_checkins::get_all_checkins, get_all_leaves::get_all_leaves,
-    get_all_users::get_all_users, get_user::get_user, leave::add_leave, remove_users::remove_users,
-    root::root, take_break::take_break, update_user::update_user,
+    breaks::{break_off::break_off, take_break::take_break},
+    entry::{checkin_checkout::checkin_checkout, get_all_checkins::get_all_checkins},
+    leave::{get_all_leaves::get_all_leaves, leave::add_leave},
+    root::root,
+    users::{
+        add_user::add_user, get_all_users::get_all_users, get_user::get_user,
+        remove_users::remove_users, update_user::update_user,
+    },
 };
 
 pub async fn routes() -> Router {
