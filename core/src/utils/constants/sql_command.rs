@@ -31,3 +31,9 @@ pub const LEAVE: &str = "leave";
 pub const LEAVE_ID: &str = "leave_id";
 pub const LEAVE_TIME: &str = "leave_time";
 pub const LEAVE_REASON: &str = "leave_reason";
+
+pub const BREAKS: &str = "breaks";
+pub const BREAK_ID: &str = "break_id";
+pub const BREAK_START_AT: &str = "break_start_at";
+pub const BREAK_END_AT: &str = "break_end_at";
+pub const BREAK_REASON: &str = "break_reason";

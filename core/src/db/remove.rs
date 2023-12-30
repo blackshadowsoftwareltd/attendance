@@ -57,3 +57,17 @@ pub async fn remove_leave_db(users: Vec<i64>) -> Result<()> {
 
     Ok(())
 }
+
+pub async fn remove_breaks_db(users: Vec<i64>) -> Result<()> {
+    let pool = DB.get().unwrap();
+    let ids = users
+        .iter()
+        .map(|x| x.to_string())
+        .collect::<Vec<String>>()
+        .join(", ");
+    let q = format!("{DELETE} from {BREAKS} {WHERE} {USER_ID} IN ({ids})",);
+    println!("{}", q);
+    sqlx::query(q.as_str()).execute(pool).await?;
+
+    Ok(())
+}

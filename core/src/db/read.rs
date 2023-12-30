@@ -1,3 +1,4 @@
+use crate::models::breaks::BreakDetails;
 use crate::models::entry::EntryDetails;
 use crate::models::leave::LeaveDetails;
 use crate::utils::constants::sql_command::*;
@@ -62,8 +63,18 @@ pub async fn read_leaves_db() -> Result<Vec<LeaveDetails>> {
     let pool = DB.get().unwrap();
     let q = format!("Select * from {LEAVE}");
 
-    let checkins = sqlx::query_as::<Sqlite, LeaveDetails>(q.as_str())
+    let leaves = sqlx::query_as::<Sqlite, LeaveDetails>(q.as_str())
         .fetch_all(pool)
         .await?;
-    Ok(checkins)
+    Ok(leaves)
+}
+
+pub async fn read_breaks_db() -> Result<Vec<BreakDetails>> {
+    let pool = DB.get().unwrap();
+    let q = format!("Select * from {BREAKS}");
+
+    let breaks = sqlx::query_as::<Sqlite, BreakDetails>(q.as_str())
+        .fetch_all(pool)
+        .await?;
+    Ok(breaks)
 }

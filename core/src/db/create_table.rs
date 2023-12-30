@@ -71,3 +71,22 @@ pub async fn create_leave_table() -> Result<()> {
     }
     Ok(())
 }
+
+pub async fn create_break_table() -> Result<()> {
+    {
+        let pool = DB.get().unwrap();
+        let q = format!(
+            "{CREATE_TABLE} {IF_NOT_EXISTS} {BREAKS} (
+            {BREAK_ID} {INTEGER} {PRIMARY_KEY} {AUTO_INCREMENT},
+            {USER_ID} {INTEGER} {NOT_NULL} {REFERENCES} {USERS}({USER_ID}),
+            {BREAK_START_AT} {VARCHAR} {NOT_NULL},
+            {BREAK_END_AT} {VARCHAR} {NOT_NULL},
+            {BREAK_REASON} {VARCHAR} {NOT_NULL}
+        )"
+        );
+
+        sqlx::query(q.as_str()).execute(pool).await?;
+        println!("Created table break")
+    }
+    Ok(())
+}

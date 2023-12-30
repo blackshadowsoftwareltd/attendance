@@ -1,32 +1,31 @@
 use axum::{http::StatusCode, Json};
 
 use crate::{
-    db::read::{read_leaves_db, read_users_db},
+    db::read::{read_breaks_db, read_users_db},
     models::{
+        breaks::BreakDetails,
         error::ErrorReason,
-        leave::LeaveDetails,
         user::UserList,
         user_details::{UserDetails, UserDetailsList},
     },
 };
 
-pub async fn get_all_leaves() -> (StatusCode, Result<String, Json<ErrorReason>>) {
-    println!("route : get_all_leaves");
+pub async fn get_all_breaks() -> (StatusCode, Result<String, Json<ErrorReason>>) {
+    println!("route : get_all_breaks");
 
     match read_users_db().await {
         Ok(users) => {
             let mut users_details = vec![];
-            let leaves: Vec<LeaveDetails> = read_leaves_db().await.unwrap();
-            for l in leaves.into_iter() {
-                // let users = u.clone();
-                let user_info = users.clone().get_user_by_id(l.user_id.clone().unwrap());
+            let breaks: Vec<BreakDetails> = read_breaks_db().await.unwrap();
+            for b in breaks.into_iter() {
+                let user_info = users.clone().get_user_by_id(b.user_id.clone().unwrap());
 
                 let x = UserDetails {
                     user_info,
-                    leave: Some(l),
+                    breaks: Some(b),
+                    leave: None,
                     checkin: None,
                     checkout: None,
-                    breaks: None,
                 };
                 users_details.push(x);
             }
@@ -34,7 +33,7 @@ pub async fn get_all_leaves() -> (StatusCode, Result<String, Json<ErrorReason>>)
             (StatusCode::OK, Ok(users_details.to_json()))
         }
         Err(e) => {
-            println!("Error getting leaves: {}", e);
+            println!("Error getting breaks: {}", e);
             ErrorReason::bad_request(e.to_string())
         }
     }

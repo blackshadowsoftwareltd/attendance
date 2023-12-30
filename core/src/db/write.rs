@@ -1,3 +1,4 @@
+use crate::models::breaks::BreakDetails;
 use crate::models::entry::EntryDetails;
 use crate::models::leave::LeaveDetails;
 use crate::utils::constants::sql_command::*;
@@ -89,6 +90,32 @@ pub async fn add_leave_db(leave: LeaveDetails) -> Result<i64, String> {
         }
         Err(e) => Err(format!(
             "Error adding Leave: {}",
+            e.as_database_error().unwrap().message()
+        )),
+    }
+}
+
+pub async fn add_break_db(breaks: BreakDetails) -> Result<i64, String> {
+    let pool = DB.get().unwrap();
+    let q = format!(
+        "{INSERT_INTO} {BREAKS} ({USER_ID}, {BREAK_START_AT}, {BREAK_END_AT}, {BREAK_REASON}) {VALUES} (?, ?, ?, ?)",
+    );
+
+    match sqlx::query(q.as_str())
+        .bind(breaks.user_id.unwrap())
+        .bind(breaks.start_at.unwrap())
+        .bind(breaks.end_at.unwrap())
+        .bind(breaks.break_reason.unwrap())
+        .execute(pool)
+        .await
+    {
+        Ok(r) => {
+            let id = r.last_insert_rowid();
+            println!("breaks added successfully. ID : {:?}", id);
+            Ok(id)
+        }
+        Err(e) => Err(format!(
+            "Error adding breaks: {}",
             e.as_database_error().unwrap().message()
         )),
     }

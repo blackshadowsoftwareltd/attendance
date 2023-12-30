@@ -34,6 +34,7 @@ pub async fn get_all_checkins() -> (StatusCode, Result<String, Json<ErrorReason>
                     checkin: Some(c.clone()),
                     checkout,
                     leave: None,
+                    breaks: None,
                 };
                 users_details.push(x);
             }
