@@ -8,11 +8,10 @@ import 'package:flutter/material.dart';
 import '../modules/checkins/checkin.dart';
 
 enum Screens {
-  signin,
-
   home,
-  profile,
   users,
+  profile,
+  signin,
   checkins,
   breaks,
   leaves;

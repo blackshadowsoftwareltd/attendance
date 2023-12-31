@@ -12,8 +12,14 @@ class HomeScreen extends ConsumerWidget {
     final selected = ref.watch(selectedScreenProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text('Attendence  ⟿  ${selected.screen}')),
-      drawer: const AppDrawer(),
+      // appBar: AppBar(title: Text('Attendence  ⟿  ${selected.screen}')),
+      // drawer: const AppDrawer(),
+      body: Row(
+        children: [
+          const AppDrawer(),
+          //     Expanded(flex: 3, child: selected.screen),
+        ],
+      ),
     );
   }
 }
