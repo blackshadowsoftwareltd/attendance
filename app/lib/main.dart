@@ -17,6 +17,7 @@ class StartApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
+      themeMode: ThemeMode.dark,
       darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
       title: 'Attendence',
       home: const HomeScreen(),

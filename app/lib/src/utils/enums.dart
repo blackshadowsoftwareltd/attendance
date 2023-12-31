@@ -36,3 +36,17 @@ enum Screens {
         Screens.leaves => 'Leaves',
       };
 }
+
+enum LoginType {
+  signin,
+  signup;
+
+  String get title => switch (this) {
+        LoginType.signin => 'Signup',
+        LoginType.signup => 'Signin',
+      };
+  String get buttonTitle => switch (this) {
+        LoginType.signin => 'Verify Me',
+        LoginType.signup => 'Register & Save',
+      };
+}
