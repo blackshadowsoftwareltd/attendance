@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import '../modules/checkins/checkin.dart';
 
 enum Screens {
-  home,
+  // home,
   users,
   profile,
   signin,
@@ -17,7 +17,7 @@ enum Screens {
   leaves;
 
   Widget get screen => switch (this) {
-        Screens.home => const HomeScreen(),
+        // Screens.home => const HomeScreen(),
         Screens.signin => const SigninScreen(),
         Screens.profile => const Placeholder(),
         Screens.users => const UsersScreen(),
@@ -27,7 +27,7 @@ enum Screens {
       };
 
   String get title => switch (this) {
-        Screens.home => 'Home',
+        // Screens.home => 'Home',
         Screens.signin => 'Signin',
         Screens.profile => 'Profile',
         Screens.users => 'Users',

@@ -7,7 +7,7 @@ part 'screen.p.g.dart';
 @riverpod
 class SelectedScreen extends _$SelectedScreen {
   @override
-  Screens build() => Screens.home;
+  Screens build() => Screens.users;
 
   void set(Screens s) => state = s;
 }

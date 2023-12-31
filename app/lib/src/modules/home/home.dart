@@ -9,17 +9,31 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selected = ref.watch(selectedScreenProvider);
-
-    return Scaffold(
-      // appBar: AppBar(title: Text('Attendence  ⟿  ${selected.screen}')),
-      // drawer: const AppDrawer(),
+    return const Scaffold(
       body: Row(
-        children: [
-          const AppDrawer(),
-          //     Expanded(flex: 3, child: selected.screen),
-        ],
+        children: [AppDrawer(), _Body()],
       ),
     );
+  }
+}
+
+class _Body extends ConsumerWidget {
+  const _Body();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selected = ref.watch(selectedScreenProvider);
+    final t = Theme.of(context);
+    return Expanded(
+        child: Padding(
+      padding: const EdgeInsets.fromLTRB(0, 20, 20, 20),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: ColoredBox(
+          color: t.colorScheme.surfaceTint.withOpacity(.1),
+          child: selected.screen,
+        ),
+      ),
+    ));
   }
 }

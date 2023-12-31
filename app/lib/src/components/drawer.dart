@@ -13,6 +13,7 @@ class AppDrawer extends ConsumerWidget {
     final t = Theme.of(context);
     return SizedBox(
       width: MediaQuery.of(context).size.width * .25,
+      height: MediaQuery.of(context).size.height,
       child: Column(
         children: [
           Padding(
@@ -25,7 +26,7 @@ class AppDrawer extends ConsumerWidget {
                   color: t.colorScheme.surfaceTint.withOpacity(.1),
                   child: Center(
                       child: Text(
-                    'Attendence  \n⟿\n  ${selected.screen}',
+                    'Attendence  \n⟿\n  ${selected.title}',
                     style: t.textTheme.bodyLarge?.copyWith(fontSize: 20),
                     textAlign: TextAlign.center,
                   )),

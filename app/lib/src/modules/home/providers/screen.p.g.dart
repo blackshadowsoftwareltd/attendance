@@ -6,7 +6,7 @@ part of 'screen.p.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$selectedScreenHash() => r'ea6cc4fbb47bfd7652b1e00ea5824432299e0214';
+String _$selectedScreenHash() => r'2c57fcf1220f89c6d7e3a0bcaa4ddacfc5fd0875';
 
 /// See also [SelectedScreen].
 @ProviderFor(SelectedScreen)
