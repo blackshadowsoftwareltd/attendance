@@ -2,6 +2,8 @@ import 'package:app/src/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'components/signin_field.dart';
+import 'components/signup_field.dart';
 import 'providers/signin.p.dart';
 
 class SigninScreen extends ConsumerWidget {
@@ -27,7 +29,7 @@ class SigninScreen extends ConsumerWidget {
               decoration: _decoration(login == LoginType.signin, t),
               alignment: login == LoginType.signin ? null : Alignment.center,
               child: login == LoginType.signin
-                  ? null
+                  ? const SigninFields()
                   : Text(
                       login.title,
                       style: t.textTheme.labelLarge?.copyWith(color: Colors.black, fontWeight: FontWeight.bold),
@@ -43,7 +45,7 @@ class SigninScreen extends ConsumerWidget {
               decoration: _decoration(login == LoginType.signup, t),
               alignment: login == LoginType.signup ? null : Alignment.center,
               child: login == LoginType.signup
-                  ? null
+                  ? const SignUpFields()
                   : Text(
                       login.title,
                       style: t.textTheme.labelLarge?.copyWith(color: Colors.black, fontWeight: FontWeight.bold),

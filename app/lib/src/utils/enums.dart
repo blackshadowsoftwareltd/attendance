@@ -1,5 +1,4 @@
 import 'package:app/src/modules/breaks/breaks.dart';
-import 'package:app/src/modules/home/home.dart';
 import 'package:app/src/modules/leaves/leaves.dart';
 import 'package:app/src/modules/signing/signin.dart';
 import 'package:app/src/modules/users/users.dart';
