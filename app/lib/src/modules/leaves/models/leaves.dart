@@ -1,36 +1,36 @@
 import 'dart:convert';
 
-class Leave {
+class LeaveDetails {
   int? userId;
   int? leaveId;
   DateTime? leaveTime;
   String? leaveReason;
 
-  Leave({
+  LeaveDetails({
     this.userId,
     this.leaveId,
     this.leaveTime,
     this.leaveReason,
   });
 
-  Leave copyWith({
+  LeaveDetails copyWith({
     int? userId,
     int? leaveId,
     DateTime? leaveTime,
     String? leaveReason,
   }) =>
-      Leave(
+      LeaveDetails(
         userId: userId ?? this.userId,
         leaveId: leaveId ?? this.leaveId,
         leaveTime: leaveTime ?? this.leaveTime,
         leaveReason: leaveReason ?? this.leaveReason,
       );
 
-  factory Leave.fromRawJson(String str) => Leave.fromJson(json.decode(str));
+  factory LeaveDetails.fromRawJson(String str) => LeaveDetails.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Leave.fromJson(Map<String, dynamic> json) => Leave(
+  factory LeaveDetails.fromJson(Map<String, dynamic> json) => LeaveDetails(
         userId: json["user_id"],
         leaveId: json["leave_id"],
         leaveTime: json["leave_time"] == null ? null : DateTime.parse(json["leave_time"]),

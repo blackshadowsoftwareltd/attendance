@@ -1,13 +1,13 @@
-import 'package:app/src/modules/breaks/models/breaks.dart';
+import 'package:app/src/modules/leaves/models/leaves.dart';
 import 'package:flutter/material.dart';
 import 'package:app/src/utils/extensions/time.dart';
 
-class BreakDetailsTile extends StatelessWidget {
-  const BreakDetailsTile({
+class LeavesTile extends StatelessWidget {
+  const LeavesTile({
     super.key,
     required this.data,
   });
-  final BreakDetails? data;
+  final LeaveDetails? data;
   @override
   Widget build(BuildContext context) {
     if (data == null) return const Expanded(flex: 1, child: SizedBox.shrink());
@@ -26,11 +26,10 @@ class BreakDetailsTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('ID : ${data!.breakId}'),
+              Text('ID : ${data!.leaveId}'),
               Text('User ID : ${data!.userId}'),
-              Text('Reason : ${data!.breakReason}'),
-              Text('Start At : ${data!.startAt.formatted}'),
-              Text('End At : ${data!.endAt.formatted}'),
+              Text('Reason : ${data!.leaveReason}'),
+              Text('Leave At : ${data!.leaveTime.formatted}'),
             ],
           ),
         ),
