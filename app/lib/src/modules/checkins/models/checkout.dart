@@ -1,32 +1,32 @@
 import 'dart:convert';
 
-class Checkout {
+class CheckoutDetails {
   int? checkInId;
   int? checkOutId;
   DateTime? checkOutTime;
 
-  Checkout({
+  CheckoutDetails({
     this.checkInId,
     this.checkOutId,
     this.checkOutTime,
   });
 
-  Checkout copyWith({
+  CheckoutDetails copyWith({
     int? checkInId,
     int? checkOutId,
     DateTime? checkOutTime,
   }) =>
-      Checkout(
+      CheckoutDetails(
         checkInId: checkInId ?? this.checkInId,
         checkOutId: checkOutId ?? this.checkOutId,
         checkOutTime: checkOutTime ?? this.checkOutTime,
       );
 
-  factory Checkout.fromRawJson(String str) => Checkout.fromJson(json.decode(str));
+  factory CheckoutDetails.fromRawJson(String str) => CheckoutDetails.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Checkout.fromJson(Map<String, dynamic> json) => Checkout(
+  factory CheckoutDetails.fromJson(Map<String, dynamic> json) => CheckoutDetails(
         checkInId: json["check_in_id"],
         checkOutId: json["check_out_id"],
         checkOutTime: json["check_out_time"] == null ? null : DateTime.parse(json["check_out_time"]),

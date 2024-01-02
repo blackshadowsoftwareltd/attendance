@@ -6,8 +6,8 @@ import 'checkout.dart';
 
 class CheckinsDetailsModel {
   UserInfo? userInfo;
-  Checkin? checkin;
-  Checkout? checkout;
+  CheckinDetails? checkin;
+  CheckoutDetails? checkout;
 
   CheckinsDetailsModel({
     this.userInfo,
@@ -17,8 +17,8 @@ class CheckinsDetailsModel {
 
   CheckinsDetailsModel copyWith({
     UserInfo? userInfo,
-    Checkin? checkin,
-    Checkout? checkout,
+    CheckinDetails? checkin,
+    CheckoutDetails? checkout,
   }) =>
       CheckinsDetailsModel(
         userInfo: userInfo ?? this.userInfo,
@@ -32,8 +32,8 @@ class CheckinsDetailsModel {
 
   factory CheckinsDetailsModel.fromJson(Map<String, dynamic> json) => CheckinsDetailsModel(
         userInfo: json["user_info"] == null ? null : UserInfo.fromJson(json["user_info"]),
-        checkin: json["checkin"] == null ? null : Checkin.fromJson(json["checkin"]),
-        checkout: json["checkout"] == null ? null : Checkout.fromJson(json["checkout"]),
+        checkin: json["checkin"] == null ? null : CheckinDetails.fromJson(json["checkin"]),
+        checkout: json["checkout"] == null ? null : CheckoutDetails.fromJson(json["checkout"]),
       );
 
   Map<String, dynamic> toJson() => {

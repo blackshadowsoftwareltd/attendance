@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 class UsersScreen extends StatelessWidget {
   const UsersScreen({super.key});
 
-  get itemBuilder => null;
-
   @override
   Widget build(BuildContext context) {
     final t = Theme.of(context);
     return GridView.builder(
+      itemCount: 20,
       padding: const EdgeInsets.all(10),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 7 / 2),
       itemBuilder: (context, index) => Padding(
