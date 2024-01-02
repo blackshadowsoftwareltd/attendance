@@ -1,18 +1,17 @@
-import 'dart:async';
+import 'package:app/src/utils/constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../utils/constants.dart';
-import '../models/checkin_details.dart';
+import '../../checkins/models/checkin_details.dart';
 
-part 'checkin.p.g.dart';
+part 'breaks.p.g.dart';
 
 @riverpod
-class Checkins extends _$Checkins {
+class Breaks extends _$Breaks {
   @override
   FutureOr<List<UserDetails>?> build() async {
-    final request = Request('GET', Uri.parse('${baseUrl}get_all_checkins'));
+    final request = Request('GET', Uri.parse('${baseUrl}get_all_breaks'));
 
     StreamedResponse response = await request.send();
 

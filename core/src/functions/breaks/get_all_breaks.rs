@@ -18,6 +18,7 @@ pub async fn get_all_breaks() -> (StatusCode, Result<String, Json<ErrorReason>>)
             let mut users_details = vec![];
             let breaks: Vec<BreakDetails> = read_breaks_db().await.unwrap();
             for b in breaks.into_iter() {
+                println!("break: {:?}", b);
                 let user_info = users.clone().get_user_by_id(b.user_id.clone().unwrap());
 
                 let x = UserDetails {
