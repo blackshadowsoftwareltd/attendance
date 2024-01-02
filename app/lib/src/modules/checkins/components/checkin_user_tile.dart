@@ -1,5 +1,6 @@
 import 'package:app/src/modules/users/models/users.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CheckinsUserTile extends StatelessWidget {
   const CheckinsUserTile({
@@ -18,7 +19,9 @@ class CheckinsUserTile extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         color: t.scaffoldBackgroundColor,
-        onPressed: () {},
+        onPressed: () {
+          Clipboard.setData(ClipboardData(text: user!.email ?? ''));
+        },
         child: SizedBox(
           width: double.maxFinite,
           child: Column(

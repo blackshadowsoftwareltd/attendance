@@ -1,25 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'checkin.p.dart';
+part of 'users.p.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$checkinsHash() => r'b6d8e8ecdcfd0611b51883bdaca6296b763516f6';
+String _$usersHash() => r'd73b9de753b47a1f3fe3af9b816493e0223d93c4';
 
-/// See also [Checkins].
-@ProviderFor(Checkins)
-final checkinsProvider = AutoDisposeAsyncNotifierProvider<Checkins,
-    List<CheckinsDetailsModel>?>.internal(
-  Checkins.new,
-  name: r'checkinsProvider',
+/// See also [Users].
+@ProviderFor(Users)
+final usersProvider =
+    AutoDisposeAsyncNotifierProvider<Users, List<UserInfo>?>.internal(
+  Users.new,
+  name: r'usersProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$checkinsHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$usersHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$Checkins = AutoDisposeAsyncNotifier<List<CheckinsDetailsModel>?>;
+typedef _$Users = AutoDisposeAsyncNotifier<List<UserInfo>?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

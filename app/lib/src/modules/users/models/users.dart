@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+List<UserInfo> getUserInfoListFromString(String str) =>
+    List<UserInfo>.from(json.decode(str).map((x) => UserInfo.fromJson(x)));
+
 class UserInfo {
   int? userId;
   String? name;
