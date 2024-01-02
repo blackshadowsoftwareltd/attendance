@@ -1,6 +1,9 @@
+import 'package:app/src/components/snack.dart';
+import 'package:app/src/modules/home/providers/screen.p.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../utils/enums.dart';
 import '../providers/signin.p.dart';
 
 class SignUpFields extends ConsumerWidget {
@@ -67,16 +70,22 @@ class SignUpFields extends ConsumerWidget {
               height: 45,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.green.withOpacity(.2)),
-                onPressed: () {
+                onPressed: () async {
                   if (!auth.validateSignup()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Please fill all the fields', style: TextStyle(color: Colors.white)),
-                        backgroundColor: Colors.red,
-                      ),
-                    );
+                    showErrorMessage(context, 'Please fill all the fields');
                     return;
                   }
+                  final error = await auth.signup();
+                  if (error != null) {
+                    if (context.mounted) {
+                      showErrorMessage(context, error);
+                    }
+                    return;
+                  }
+                  if (context.mounted) {
+                    showSuccessMessage(context, 'Signup successful');
+                  }
+                  ref.read(selectedScreenProvider.notifier).set(Screens.users);
                 },
                 child: Text(login.buttonTitle),
               ),

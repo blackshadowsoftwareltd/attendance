@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'package:app/src/utils/constants.dart';
+import 'package:flutter/foundation.dart';
+import 'package:http/http.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../utils/enums.dart';
@@ -53,5 +57,27 @@ class Auth extends _$Auth {
 
   bool validateSignup() {
     return state.name?.isNotEmpty == true && state.email?.isNotEmpty == true && state.password?.isNotEmpty == true;
+  }
+
+  Future<String?> signup() async {
+    try {
+      var headers = {'Content-Type': 'application/json'};
+      var request = Request('POST', Uri.parse('${baseUrl}add_user'));
+      request.body = json.encode({"name": state.name, "email": state.email, "password": state.password});
+      request.headers.addAll(headers);
+
+      StreamedResponse response = await request.send();
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        debugPrint(await response.stream.bytesToString());
+        return null;
+      } else {
+        debugPrint(response.reasonPhrase);
+        return response.reasonPhrase;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return e.toString();
+    }
   }
 }
