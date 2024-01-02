@@ -1,5 +1,6 @@
 import 'package:app/src/modules/checkins/models/checkout.dart';
 import 'package:flutter/material.dart';
+import 'package:app/src/utils/extensions/time.dart';
 
 class CheckinsCheckoutTile extends StatelessWidget {
   const CheckinsCheckoutTile({
@@ -9,7 +10,7 @@ class CheckinsCheckoutTile extends StatelessWidget {
   final CheckoutDetails? data;
   @override
   Widget build(BuildContext context) {
-    if (data == null) return const SizedBox.shrink();
+    if (data == null) return const Expanded(flex: 1, child: SizedBox.shrink());
 
     final t = Theme.of(context);
     return Expanded(
@@ -27,7 +28,7 @@ class CheckinsCheckoutTile extends StatelessWidget {
             children: [
               Text('ID : ${data!.checkOutId}'),
               Text('Checkin ID : ${data!.checkInId}'),
-              Text('Checkout Time : ${data!.checkOutTime}'),
+              Text('Checkout Time : ${data!.checkOutTime.formatted}'),
             ],
           ),
         ),

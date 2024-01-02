@@ -4,6 +4,9 @@ import '../../users/models/users.dart';
 import 'checkin.dart';
 import 'checkout.dart';
 
+List<CheckinsDetailsModel> checkinsDetailsModelFromJson(String str) =>
+    List<CheckinsDetailsModel>.from(json.decode(str).map((x) => CheckinsDetailsModel.fromJson(x)));
+
 class CheckinsDetailsModel {
   UserInfo? userInfo;
   CheckinDetails? checkin;

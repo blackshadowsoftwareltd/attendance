@@ -1,34 +1,39 @@
-import 'package:app/src/modules/checkins/models/checkin.dart';
-import 'package:app/src/modules/checkins/models/checkout.dart';
-import 'package:app/src/modules/users/models/users.dart';
+import 'package:app/src/modules/checkins/providers/checkin.p.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'components/checkin_checkout_tile.dart';
 import 'components/checkin_details_tile.dart';
 import 'components/checkin_user_tile.dart';
 
-class CheckInScreen extends StatelessWidget {
+class CheckInScreen extends ConsumerWidget {
   const CheckInScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final checkins = ref.watch(checkinsProvider);
     return Column(
       children: [
         const _Header(),
         Expanded(
-          child: ListView.builder(
-            itemCount: 20,
-            padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-            itemBuilder: (context, index) => Padding(
-              padding: const EdgeInsets.all(10),
-              child: Row(
-                children: [
-                  CheckinsDetailsTile(data: CheckinDetails()),
-                  const SizedBox(width: 20),
-                  CheckinsUserTile(user: UserInfo()),
-                  const SizedBox(width: 20),
-                  CheckinsCheckoutTile(data: CheckoutDetails()),
-                ],
+          child: checkins.when(
+            error: (e, _) => Center(child: Text(e.toString())),
+            loading: () => const Center(child: CircularProgressIndicator()),
+            data: (data) => ListView.builder(
+              itemCount: data?.length,
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.all(10),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CheckinsDetailsTile(data: data![index].checkin),
+                    const SizedBox(width: 20),
+                    CheckinsUserTile(user: data[index].userInfo),
+                    const SizedBox(width: 20),
+                    CheckinsCheckoutTile(data: data[index].checkout),
+                  ],
+                ),
               ),
             ),
           ),

@@ -9,7 +9,7 @@ class CheckinsUserTile extends StatelessWidget {
   final UserInfo? user;
   @override
   Widget build(BuildContext context) {
-    if (user == null) return const SizedBox.shrink();
+    if (user == null) return const Expanded(flex: 1, child: SizedBox.shrink());
 
     final t = Theme.of(context);
     return Expanded(
