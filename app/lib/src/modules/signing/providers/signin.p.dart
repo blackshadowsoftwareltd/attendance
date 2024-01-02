@@ -19,7 +19,7 @@ class LoginState extends _$LoginState {
 @riverpod
 class Auth extends _$Auth {
   @override
-  User build() => User();
+  UserInfo build() => UserInfo();
 
   void setEmail(String e) {
     state.email = e;
@@ -37,11 +37,11 @@ class Auth extends _$Auth {
   }
 
   void setId(int i) {
-    state.id = i;
+    state.userId = i;
     ref.notifyListeners();
   }
 
-  void set(User u) {
+  void set(UserInfo u) {
     state = u;
     ref.notifyListeners();
   }

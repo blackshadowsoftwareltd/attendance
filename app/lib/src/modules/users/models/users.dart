@@ -1,55 +1,46 @@
 import 'dart:convert';
 
-class User {
+class UserInfo {
+  int? userId;
   String? name;
   String? email;
   String? password;
-  int? id;
 
-  User({this.name, this.email, this.password, this.id});
+  UserInfo({
+    this.userId,
+    this.name,
+    this.email,
+    this.password,
+  });
 
-  User.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    email = json['email'];
-    password = json['password'];
-    id = json['id'];
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'email': email,
-      'password': password,
-      'id': id,
-    };
-  }
-
-  factory User.fromRawJson(String str) => User.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
-  @override
-  String toString() {
-    return 'User{name: $name, email: $email, password: $password, id: $id}';
-  }
-
-  @override
-  bool operator ==(Object other) => other is User && id == other.id;
-
-  @override
-  int get hashCode => id.hashCode;
-
-  User copyWith({
+  UserInfo copyWith({
+    int? userId,
     String? name,
     String? email,
     String? password,
-    int? id,
-  }) {
-    return User(
-      name: name ?? this.name,
-      email: email ?? this.email,
-      password: password ?? this.password,
-      id: id ?? this.id,
-    );
-  }
+  }) =>
+      UserInfo(
+        userId: userId ?? this.userId,
+        name: name ?? this.name,
+        email: email ?? this.email,
+        password: password ?? this.password,
+      );
+
+  factory UserInfo.fromRawJson(String str) => UserInfo.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory UserInfo.fromJson(Map<String, dynamic> json) => UserInfo(
+        userId: json["user_id"],
+        name: json["name"],
+        email: json["email"],
+        password: json["password"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "user_id": userId,
+        "name": name,
+        "email": email,
+        "password": password,
+      }..removeWhere((_, v) => v == null);
 }
