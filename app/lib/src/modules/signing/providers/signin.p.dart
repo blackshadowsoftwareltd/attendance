@@ -5,6 +5,7 @@ import 'package:http/http.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../utils/enums.dart';
+import '../../home/models/error.dart';
 import '../../users/models/users.dart';
 
 part 'signin.p.g.dart';
@@ -75,6 +76,30 @@ class Auth extends _$Auth {
         debugPrint(response.reasonPhrase);
         return response.reasonPhrase;
       }
+    } catch (e) {
+      debugPrint(e.toString());
+      return e.toString();
+    }
+  }
+
+  Future<String?> signin() async {
+    try {
+      var headers = {'Content-Type': 'application/json'};
+      var request = Request('POST', Uri.parse('${baseUrl}signin'));
+      request.body = json.encode({"email": state.email, "password": state.password});
+      request.headers.addAll(headers);
+
+      StreamedResponse response = await request.send();
+      final data = await response.stream.bytesToString();
+
+      if (response.statusCode == 200) {
+        final users = getUserInfoListFromString(data);
+        if (users.isEmpty) return 'No user found with this email and password';
+        return null;
+      } else if (response.statusCode == 400) {
+        return ApiError.fromRawJson(data).reason?.fold('Failed : ', (p, e) => '$p $e');
+      }
+      return response.reasonPhrase;
     } catch (e) {
       debugPrint(e.toString());
       return e.toString();
