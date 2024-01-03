@@ -2,10 +2,7 @@ use axum::{http::StatusCode, Json};
 
 use crate::{
     db::read::signin_db,
-    models::{
-        error::ErrorReason,
-        user::{User, UserList},
-    },
+    models::{error::ErrorReason, user::User},
 };
 
 pub async fn signin(Json(payload): Json<User>) -> (StatusCode, Result<String, Json<ErrorReason>>) {
@@ -16,7 +13,7 @@ pub async fn signin(Json(payload): Json<User>) -> (StatusCode, Result<String, Js
             println!("{} Users", users.len());
             match users.is_empty() {
                 true => ErrorReason::bad_request("Invalid Email or Password".to_string()),
-                false => (StatusCode::OK, Ok(users.to_json())),
+                false => (StatusCode::OK, Ok(users.first().unwrap().clone().to_json())),
             }
         }
         Err(e) => {
