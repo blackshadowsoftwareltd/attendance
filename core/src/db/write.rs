@@ -8,7 +8,7 @@ use anyhow::Result;
 pub async fn add_user_db(user: User) -> Result<i64, String> {
     let pool = DB.get().unwrap();
     let q = format!(
-        "{INSERT_INTO} {USERS} ({NAME}, {EMAIL},{PASSWARD}) {VALUES} ({:?}, {:?},{:?})",
+        "{INSERT_INTO} {USERS} ({NAME}, {EMAIL},{PASSWORD}) {VALUES} ({:?}, {:?},{:?})",
         user.name,
         user.email,
         user.password.unwrap()

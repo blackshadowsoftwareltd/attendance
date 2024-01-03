@@ -1,7 +1,8 @@
 pub const USER_ID: &str = "user_id";
 pub const NAME: &str = "name";
 pub const EMAIL: &str = "email";
-pub const PASSWARD: &str = "password";
+pub const AND: &str = "and";
+pub const PASSWORD: &str = "password";
 pub const USERS: &str = "users";
 pub const NULL: &str = "NULL";
 pub const SELECT: &str = "Select";

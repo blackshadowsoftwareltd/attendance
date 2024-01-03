@@ -16,7 +16,20 @@ pub async fn read_users_db() -> Result<Vec<User>> {
     // println!("users: {:?}", users);
     Ok(users)
 }
+pub async fn signin_db(email: String, pass: String) -> Result<Vec<User>> {
+    let pool = DB.get().unwrap();
+    let q = format!(
+        "Select {USER_ID},{NAME},{EMAIL} from {USERS} {WHERE} {EMAIL}=? {AND} {PASSWORD}=?"
+    );
 
+    let users = sqlx::query_as::<Sqlite, User>(q.as_str())
+        .bind(email)
+        .bind(pass)
+        .fetch_all(pool)
+        .await?;
+    // println!("users: {:?}", users);
+    Ok(users)
+}
 pub async fn read_check_ins_db() -> Result<Vec<EntryDetails>> {
     let pool = DB.get().unwrap();
     let q = format!("Select * from {CHECKIN}");

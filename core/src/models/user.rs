@@ -4,7 +4,7 @@ use sqlx::prelude::FromRow;
 #[derive(Debug, Serialize, Clone, PartialEq, Deserialize, FromRow)]
 pub struct User {
     pub user_id: Option<i64>,
-    pub name: String,
+    pub name: Option<String>,
     pub email: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     #[sqlx(default)] // for optional fields to read db

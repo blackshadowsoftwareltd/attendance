@@ -10,7 +10,7 @@ pub async fn create_user_table() -> Result<()> {
             {USER_ID} {INTEGER} {PRIMARY_KEY} {AUTO_INCREMENT},
             {NAME} {VARCHAR},
             {EMAIL} {VARCHAR} {UNIQUE},
-            {PASSWARD} {VARCHAR} {NULL}
+            {PASSWORD} {VARCHAR} {NULL}
         )"
         );
 
