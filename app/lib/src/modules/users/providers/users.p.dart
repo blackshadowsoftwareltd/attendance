@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:app/src/modules/users/models/users.dart';
 import 'package:app/src/utils/constants.dart';
@@ -25,4 +26,18 @@ class Users extends _$Users {
 
     return Future.value([]);
   }
+}
+
+@riverpod
+class OverlayCTRL extends _$OverlayCTRL {
+  @override
+  OverlayPortalController build() => OverlayPortalController();
+}
+
+@riverpod
+class OverlayUser extends _$OverlayUser {
+  @override
+  UserInfo? build() => null;
+
+  void set(UserInfo? u) => state = u;
 }
