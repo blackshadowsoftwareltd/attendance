@@ -7,6 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../utils/enums.dart';
 import '../../home/models/error.dart';
 import '../../users/models/users.dart';
+import '../../users/providers/users.p.dart';
 
 part 'signin.p.g.dart';
 
@@ -69,8 +70,10 @@ class Auth extends _$Auth {
 
       StreamedResponse response = await request.send();
 
+      final data = await response.stream.bytesToString();
       if (response.statusCode >= 200 && response.statusCode < 300) {
-        debugPrint(await response.stream.bytesToString());
+        final user = UserInfo.fromRawJson(data);
+        ref.read(currentUserProvider.notifier).set(user);
         return null;
       } else {
         debugPrint(response.reasonPhrase);
@@ -93,8 +96,8 @@ class Auth extends _$Auth {
       final data = await response.stream.bytesToString();
 
       if (response.statusCode == 200) {
-        final users = getUserInfoListFromString(data);
-        if (users.isEmpty) return 'No user found with this email and password';
+        final user = UserInfo.fromRawJson(data);
+        ref.read(currentUserProvider.notifier).set(user);
         return null;
       } else if (response.statusCode == 400) {
         return ApiError.fromRawJson(data).reason?.fold('Failed : ', (p, e) => '$p $e');

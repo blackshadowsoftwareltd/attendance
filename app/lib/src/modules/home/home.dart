@@ -2,6 +2,7 @@ import 'package:app/src/components/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../users/providers/users.p.dart';
 import 'providers/screen.p.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -23,6 +24,8 @@ class _Body extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selected = ref.watch(selectedScreenProvider);
+    ref.watch(currentUserProvider);
+
     final t = Theme.of(context);
     return Expanded(
         child: Padding(

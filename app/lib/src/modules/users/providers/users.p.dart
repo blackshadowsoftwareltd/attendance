@@ -8,6 +8,14 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'users.p.g.dart';
 
 @riverpod
+class CurrentUser extends _$CurrentUser {
+  @override
+  UserInfo? build() => null;
+
+  void set(UserInfo? u) => state = u;
+}
+
+@riverpod
 class Users extends _$Users {
   @override
   FutureOr<List<UserInfo>?> build() async {

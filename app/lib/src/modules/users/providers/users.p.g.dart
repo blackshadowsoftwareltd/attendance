@@ -6,6 +6,21 @@ part of 'users.p.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+String _$currentUserHash() => r'a443a845fb13c9043a87fbc5fd6fd56f30136827';
+
+/// See also [CurrentUser].
+@ProviderFor(CurrentUser)
+final currentUserProvider =
+    AutoDisposeNotifierProvider<CurrentUser, UserInfo?>.internal(
+  CurrentUser.new,
+  name: r'currentUserProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$currentUserHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$CurrentUser = AutoDisposeNotifier<UserInfo?>;
 String _$usersHash() => r'140afa698172c2bc0eded9a7adaffe5c14116756';
 
 /// See also [Users].

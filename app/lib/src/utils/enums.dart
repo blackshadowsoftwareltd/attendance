@@ -5,6 +5,7 @@ import 'package:app/src/modules/users/users.dart';
 import 'package:flutter/material.dart';
 
 import '../modules/checkins/checkin.dart';
+import '../modules/profile/profile.dart';
 
 enum Screens {
   // home,
@@ -18,7 +19,7 @@ enum Screens {
   Widget get screen => switch (this) {
         // Screens.home => const HomeScreen(),
         Screens.signin => const SigninScreen(),
-        Screens.profile => const Placeholder(),
+        Screens.profile => const ProfileScreen(),
         Screens.users => const UsersScreen(),
         Screens.checkins => const CheckInScreen(),
         Screens.breaks => const BreaksScreen(),
