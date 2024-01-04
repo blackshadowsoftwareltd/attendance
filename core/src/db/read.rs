@@ -8,7 +8,7 @@ use sqlx::{self, sqlite::Sqlite};
 
 pub async fn read_users_db() -> Result<Vec<User>> {
     let pool = DB.get().unwrap();
-    let q = format!("Select {USER_ID},{NAME},{EMAIL} from {USERS}");
+    let q = format!("Select {USER_ID},{NAME},{EMAIL} from {USERS}  ORDER BY {USER_ID} DESC");
 
     let users = sqlx::query_as::<Sqlite, User>(q.as_str())
         .fetch_all(pool)
@@ -32,7 +32,7 @@ pub async fn signin_db(email: String, pass: String) -> Result<Vec<User>> {
 }
 pub async fn read_check_ins_db() -> Result<Vec<EntryDetails>> {
     let pool = DB.get().unwrap();
-    let q = format!("Select * from {CHECKIN}");
+    let q = format!("Select * from {CHECKIN} ORDER BY {CHECK_IN_TIME} DESC");
 
     let checkins = sqlx::query_as::<Sqlite, EntryDetails>(q.as_str())
         .fetch_all(pool)
