@@ -41,6 +41,7 @@ class SigninFields extends ConsumerWidget {
               width: 350,
               height: 50,
               child: TextField(
+                obscureText: true,
                 decoration: InputDecoration(
                   hintText: 'Password',
                   border: OutlineInputBorder(
