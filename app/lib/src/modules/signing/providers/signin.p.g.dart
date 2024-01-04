@@ -21,7 +21,7 @@ final loginStateProvider =
 );
 
 typedef _$LoginState = AutoDisposeNotifier<LoginType>;
-String _$authHash() => r'5714bec124162bbb0dc4c6e148df414a6b022bc7';
+String _$authHash() => r'4335a4ea6fe45069ab389bb69b1af52762e179f0';
 
 /// See also [Auth].
 @ProviderFor(Auth)

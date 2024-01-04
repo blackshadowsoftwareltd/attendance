@@ -1,3 +1,5 @@
+import 'package:app/src/modules/profile/components/checkins.dart';
+import 'package:app/src/modules/profile/components/checkout.dart';
 import 'package:app/src/modules/users/providers/users.p.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,6 +31,9 @@ class ProfileScreen extends ConsumerWidget {
       child: Column(
         children: [
           Text('User ID : ${currentUser.userId} || Name : ${currentUser.name} || Email : ${currentUser.email}'),
+          const Row(
+            children: [TakeCheckins(), TakeCheckout()],
+          ),
         ],
       ),
     );
