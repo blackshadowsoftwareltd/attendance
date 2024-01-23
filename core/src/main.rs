@@ -4,6 +4,7 @@ pub mod functions;
 pub mod models;
 pub mod routes;
 pub mod run;
+pub mod test;
 pub mod utils;
 use run::run;
 

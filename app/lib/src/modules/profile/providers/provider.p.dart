@@ -62,7 +62,7 @@ class CurrentChckouts extends _$CurrentChckouts {
 
     final request = Request('POST', Uri.parse('${baseUrl}checkin_checkout'));
     var headers = {'Content-Type': 'application/json'};
-    request.body = json.encode({"check_in_id": checkin?.checkInId, "check_out_time": time.toIso8601String()});
+    request.body = json.encode({"check_in_id": checkin.checkInId, "check_out_time": time.toIso8601String()});
     request.headers.addAll(headers);
     StreamedResponse response = await request.send();
     final data = await response.stream.bytesToString();
